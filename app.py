@@ -11,6 +11,8 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
+server = app.server
+
 df = pd.read_csv('sample_set_manipulated.csv')
 
 color_pallete = ['#DD4404','#f9bf3e','#383481','#474646']
@@ -257,5 +259,4 @@ app.layout = html.Div(children=[
     ])
 
 if __name__ == '__main__':
-    server = app.server
-
+    app.run_server(debug = True)
