@@ -108,6 +108,24 @@ fig_8.update_layout(legend=dict(
         xanchor='auto',
         x=1.0))
 
+
+
+top_gender = df.groupby('sex')['id'].nunique().sort_values(ascending=False).head(1)
+for name in top_gender.index:
+    top_gender = name
+
+
+top_languages = df.groupby('language')['id'].nunique().sort_values(ascending=False).head(1)
+for language in top_languages.index:
+    top_languages = language
+
+top_services = df.groupby('dv_ht')['id'].nunique().sort_values(ascending=False).head(1)
+for service in top_services.index:
+    if service == 'DV':
+        top_services = 'Domestic Violence'
+    else:
+        top_services = 'Human Trafficking'
+
 # remove time delta and use only today's date with real data
 today = dt.date.today()-dt.timedelta(days=10)
 today_str = dt.datetime.strftime(today,'%Y-%m-%d')
@@ -207,9 +225,12 @@ app.layout = html.Div(children=[
                                    'color':'#474646',
                                    'font-weight':'bold'}),
 
-                    html.Br(),
-                    html.Br(),
-
+                    html.H5(children=(f"As you will see in the charts below, the gender Ruby's Place helps the most is {top_gender}, while the language most spoken by our clients is {top_languages}."),
+                            style={'textAlign':'center',
+                                   'font':'Arial',
+                                   'color':'#474646',
+                                   'padding':'50px'}),
+                    
                     html.Div([
                         html.Div([dcc.Graph(figure=fig_2)], className="six columns"),
                         html.Div([dcc.Graph(figure=fig_4)], className="six columns")
@@ -235,9 +256,12 @@ app.layout = html.Div(children=[
                                    'color':'#474646',
                                    'font-weight':'bold'}),
 
-                    html.Br(),
-                    html.Br(),
-
+                    html.H5(children=(f"In terms of services provided, {top_services} is our top category."),
+                            style={'textAlign':'center',
+                                   'font':'Arial',
+                                   'color':'#474646',
+                                   'padding':'50px'}),
+                    
                     html.Div([
                         html.Div([dcc.Graph(figure=fig_5)], className="six columns"),
                         html.Div([dcc.Graph(figure=fig_7)], className="six columns")
