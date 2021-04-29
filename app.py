@@ -210,7 +210,7 @@ app.layout = html.Div(children=[
                                                  'fontSize':25,
                                                  'color':'#474646'}
                                          , className='four columns'),
-                        html.Div([donate_button],style={'padding': '80px',
+                        html.Div([donate_button],style={'padding': '90px',
                                                  'textAlign':'center',
                                                  'fontSize':25}
                                          , className='four columns')
